@@ -8,8 +8,8 @@ import './App.css';
 
 function App() {
   const [stats, setStats] = useState({
-    requests: 6863631,
-    visitors: 346569
+    requests: 1829,
+    visitors: 1903
   });
   
   const [currentTime, setCurrentTime] = useState(new Date());
