@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,16 +9,111 @@
 :root {
   --ghibli-blue: #4C9EEB;
   --ghibli-green: #48BB78;
+  --ghibli-yellow: #FFD700;
+  --neoxr-dark: #0f172a;
+  --neoxr-darker: #0a1120;
+  --neoxr-card: #1e293b;
+  --neoxr-highlight: #FFD700;
 }
 
 body {
   font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--neoxr-dark);
+  color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23283352' fill-opacity='0.2'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-.font-fantasy {
-  font-family: 'Nunito', sans-serif;
+.mono-font {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.neoxr-card {
+  background-color: var(--neoxr-card);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.neoxr-highlight {
+  border-left: 3px solid var(--neoxr-highlight);
+}
+
+.neoxr-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+.neoxr-btn {
+  background-color: var(--neoxr-darker);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neoxr-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.neoxr-btn-primary {
+  background-color: var(--ghibli-blue);
+}
+
+.neoxr-btn-primary:hover {
+  background-color: #4187cc;
+}
+
+.neoxr-btn-success {
+  background-color: var(--ghibli-green);
+}
+
+.neoxr-btn-success:hover {
+  background-color: #3da968;
+}
+
+.neoxr-status {
+  background: rgba(76, 158, 235, 0.1);
+  border: 1px solid rgba(76, 158, 235, 0.3);
+  color: var(--ghibli-blue);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--neoxr-highlight);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.timeline-line {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--neoxr-highlight);
+  opacity: 0.3;
+  transform: translateX(-50%);
+}
+
+.image-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 
 /* Animation for loading dots */
@@ -42,34 +138,16 @@ body {
   animation-delay: 0.3s;
 }
 
-/* Custom animations */
-@keyframes float {
+/* Custom loader animation */
+@keyframes loadingPulse {
   0%, 100% {
-    transform: translateY(0);
+    opacity: 0.5;
   }
   50% {
-    transform: translateY(-10px);
+    opacity: 1;
   }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Glass effect */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-/* Card hover effects */
-.card-hover {
-  transition: all 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.animate-loading-pulse {
+  animation: loadingPulse 1.5s infinite;
 }

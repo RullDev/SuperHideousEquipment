@@ -1,76 +1,59 @@
-
-import { useRef } from 'react';
+import { useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { motion } from 'framer-motion';
 
-const ImageUploader = ({ 
-  onDrop, 
-  previewUrl, 
-  isDragActive, 
-  getInputProps, 
-  getRootProps 
-}) => {
-  const fileInputRef = useRef();
-
-  const handleClickUpload = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
+const ImageUploader = ({ onImageChange }) => {
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
+      onImageChange(file);
     }
-  };
+  }, [onImageChange]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/jpeg': [],
+      'image/png': []
+    },
+    maxSize: 5242880, // 5MB
+    multiple: false
+  });
 
   return (
-    <div className="flex flex-col">
+    <div className="mt-2">
       <motion.div 
+        {...getRootProps()}
         whileHover={{ scale: 1.02 }}
-        className={`border-2 border-dashed rounded-xl p-6 mb-4 transition-all cursor-pointer flex flex-col items-center justify-center min-h-[250px] ${
-          isDragActive ? 'border-ghibli-blue bg-blue-50' : 'border-gray-300 hover:border-ghibli-blue'
-        } ${previewUrl ? 'bg-gray-50' : 'hover:shadow-lg'}`}
-        onClick={handleClickUpload}
+        whileTap={{ scale: 0.98 }}
+        className={`image-container cursor-pointer p-4 flex flex-col items-center justify-center h-48 transition-all ${
+          isDragActive ? 'border-blue-500 bg-blue-500/10' : ''
+        }`}
       >
-        <input 
-          type="file" 
-          accept="image/jpeg, image/png, image/jpg"
-          onChange={(e) => {
-            if (e.target.files && e.target.files[0]) {
-              onDrop([e.target.files[0]]);
-            }
-          }}
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-        />
-        
-        {previewUrl ? (
-          <motion.img 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            src={previewUrl} 
-            alt="Preview" 
-            className="max-h-[230px] object-contain rounded-lg shadow-md" 
+        <input {...getInputProps()} />
+        <svg 
+          className={`h-12 w-12 mb-3 ${isDragActive ? 'text-blue-400' : 'text-gray-400'}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2" 
+            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
           />
-        ) : (
-          <div className="text-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="mb-2"
-            >
-              <svg className="mx-auto h-16 w-16 text-ghibli-blue opacity-70" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </motion.div>
-            <p className="text-gray-600 font-medium text-lg">
-              {isDragActive 
-                ? 'Drop your image here...' 
-                : 'Drag & drop an image here, or click to select'}
-            </p>
-            <p className="text-sm text-gray-500 mt-2">Only JPG/PNG formats are supported</p>
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="mt-4 bg-ghibli-blue/10 rounded-lg px-4 py-2 inline-block"
-            >
-              <span className="text-ghibli-blue font-medium">Browse files</span>
-            </motion.div>
-          </div>
-        )}
+        </svg>
+        <p className="text-center text-gray-300 text-sm mb-1">
+          {isDragActive ? 'Drop your image here...' : 'Drag & drop an image here'}
+        </p>
+        <p className="text-center text-gray-500 text-xs">
+          or click to select a file
+        </p>
+        <p className="mt-2 text-xs text-gray-500">
+          Supported: JPEG, PNG (Max: 5MB)
+        </p>
       </motion.div>
     </div>
   );
