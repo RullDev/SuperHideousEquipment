@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/transform-ghibli",
+      "methods": ["POST"],
+      "dest": "/api/transform-ghibli.js"
+    }
+  ]
+}
