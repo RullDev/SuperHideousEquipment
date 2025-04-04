@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -8,16 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        ghibli: {
-          blue: '#6698cb',
-          green: '#8bc9a6',
-          yellow: '#f9db79',
-          pink: '#e8a3bf',
-          red: '#e47a7a',
-        }
-      },
-      fontFamily: {
-        fantasy: ['Segoe UI', 'Arial', 'sans-serif']
+        'ghibli-blue': '#4C9EEB',
+        'ghibli-green': '#48BB78',
+        'ghibli-purple': '#9F7AEA',
+        'ghibli-yellow': '#ECC94B'
       }
     },
   },

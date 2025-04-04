@@ -1,33 +1,37 @@
 
-# Ghibli Image Transformer API Documentation
+# Ghibli Image Transformer API
 
-This API allows you to transform ordinary images into the beautiful and distinctive style of Studio Ghibli animations.
+![Studio Ghibli Style](https://i.imgur.com/sample-image.jpg)
 
-## Base URL
+> Transform ordinary images into the beautiful and distinctive style of Studio Ghibli animations with our AI-powered API.
 
+## 🚀 Quick Start
+
+```bash
+# Example using curl
+curl -X POST \
+  https://your-app-url.replit.app/api/transform-ghibli \
+  -H 'Content-Type: application/json' \
+  -d '{"imageUrl":"data:image/jpeg;base64,/9j/4AAQSkZJRg..."}'
 ```
-https://your-app-url.replit.app
-```
 
-## Endpoints
+## 📋 API Reference
 
 ### Transform Image to Ghibli Style
 
+```http
+POST /api/transform-ghibli
+```
+
 Transforms an uploaded image into Studio Ghibli style using AI.
 
-**URL**: `/api/transform-ghibli`
+#### Request
 
-**Method**: `POST`
+| Parameter | Type   | Description                   | Required |
+|-----------|--------|-------------------------------|----------|
+| `imageUrl`| string | Base64 encoded image data     | Yes      |
 
-**Content-Type**: `application/json`
-
-**Request Body**:
-
-| Parameter | Type   | Description                         | Required |
-|-----------|--------|-------------------------------------|----------|
-| imageUrl  | string | Base64 encoded image data           | Yes      |
-
-**Example Request**:
+**Example Request Body:**
 
 ```json
 {
@@ -35,11 +39,13 @@ Transforms an uploaded image into Studio Ghibli style using AI.
 }
 ```
 
-**Success Response**:
+#### Responses
 
-**Code**: `200 OK`
+**Success Response:**
 
-**Content**:
+```http
+Status: 200 OK
+```
 
 ```json
 {
@@ -48,60 +54,52 @@ Transforms an uploaded image into Studio Ghibli style using AI.
 }
 ```
 
-**Error Response**:
+**Error Response:**
 
-**Code**: `400 BAD REQUEST` or `500 INTERNAL SERVER ERROR`
-
-**Content**:
+```http
+Status: 400 BAD REQUEST
+```
 
 ```json
 {
   "success": false,
-  "message": "Error message details"
+  "message": "Missing or invalid image data"
 }
 ```
 
-## Rate Limits and Constraints
+## 🛠️ Usage Examples
 
-- Maximum image size: 5MB
-- Supported formats: JPEG and PNG
-- Processing time: Approximately 30-60 seconds per image
-- Rate limit: 10 requests per hour per IP address
-
-## Integration Examples
-
-### JavaScript/React Example
+### JavaScript (Browser)
 
 ```javascript
-import axios from 'axios';
-
 async function transformImage(file) {
   try {
     // Convert file to base64
     const base64Image = await readFileAsBase64(file);
     
-    // API request
-    const response = await axios.post('/api/transform-ghibli', {
-      imageUrl: base64Image
-    }, {
+    // Send request to API
+    const response = await fetch('/api/transform-ghibli', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      timeout: 60000 // 1 minute timeout
+      body: JSON.stringify({ imageUrl: base64Image })
     });
     
-    if (response.data.success) {
-      return response.data.result;
+    const data = await response.json();
+    
+    if (data.success) {
+      return data.result; // Base64 image result
     } else {
-      throw new Error('Failed to process image');
+      throw new Error(data.message || 'Failed to transform image');
     }
   } catch (error) {
-    console.error('Error transforming image:', error);
+    console.error('Error:', error);
     throw error;
   }
 }
 
-// Helper function to read file as base64
+// Helper function to convert file to base64
 function readFileAsBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -112,7 +110,7 @@ function readFileAsBase64(file) {
 }
 ```
 
-### Python Example
+### Python
 
 ```python
 import requests
@@ -143,7 +141,7 @@ def transform_image(image_path):
     raise Exception(f"Error: {response.json().get('message', 'Unknown error')}")
 ```
 
-### Node.js Server-Side Example
+### Node.js
 
 ```javascript
 const fs = require('fs');
@@ -182,17 +180,37 @@ async function transformImage(imagePath) {
 }
 ```
 
-## Error Codes
+## ⚙️ Technical Specifications
 
-| Code | Description |
-|------|-------------|
+| Property                | Value                         |
+|-------------------------|-------------------------------|
+| Maximum image size      | 5MB                           |
+| Supported formats       | JPEG, PNG                     |
+| Processing time         | 30-60 seconds                 |
+| Rate limit              | 10 requests per hour per IP   |
+| Response format         | JSON with Base64 image data   |
+
+## 🔍 Error Codes
+
+| Code | Description                         |
+|------|-------------------------------------|
 | 400  | Missing image URL or invalid format |
-| 413  | Image size too large (>5MB) |
-| 415  | Unsupported image format |
-| 429  | Rate limit exceeded |
-| 500  | Internal server error |
-| 504  | Processing timeout |
+| 413  | Image size too large (>5MB)         |
+| 415  | Unsupported image format            |
+| 429  | Rate limit exceeded                 |
+| 500  | Internal server error               |
+| 504  | Processing timeout                  |
 
-## Credits
+## 📝 Notes
 
-Powered by Ghibli AI API
+- The transformation process uses AI to analyze and convert your image into a Ghibli-style artwork
+- Processing time may vary depending on server load and image complexity
+- For optimal results, use clear images with good lighting and minimal background clutter
+
+## 🔒 Security
+
+The API only accepts valid JPEG or PNG images encoded in base64 format. All image data is processed securely and is not stored on our servers after processing is complete.
+
+## 🎨 Credits
+
+Powered by the Ghibli AI API. Inspired by the timeless and magical art style of Studio Ghibli films.

@@ -5,6 +5,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ghibli-blue: #4C9EEB;
+  --ghibli-green: #48BB78;
+}
+
 body {
   font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
