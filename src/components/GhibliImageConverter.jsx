@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
@@ -12,22 +11,22 @@ const GhibliImageConverter = () => {
   const [resultUrl, setResultUrl] = useState('');
   const [uploadedCount, setUploadedCount] = useState(0);
   const [processedCount, setProcessedCount] = useState(0);
-  
+
   const handleReset = () => {
     setImage(null);
     setResultUrl('');
   };
-  
+
   const handleSubmit = async () => {
     if (!image) return;
-    
+
     try {
       setLoading(true);
-      
+
       // Create form data for API request
       const formData = new FormData();
       formData.append('image', image);
-      
+
       // Use the local API endpoint
       const response = await axios.post('/api/transform-ghibli', {
         imageUrl: await convertToBase64(image)
@@ -35,7 +34,7 @@ const GhibliImageConverter = () => {
         headers: { 'Content-Type': 'application/json' },
         timeout: 60000 
       });
-      
+
       if (response.data && response.data.result) {
         setResultUrl(response.data.result);
         setProcessedCount(prev => prev + 1);
@@ -50,7 +49,7 @@ const GhibliImageConverter = () => {
       setLoading(false);
     }
   };
-  
+
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -59,10 +58,10 @@ const GhibliImageConverter = () => {
       reader.onerror = error => reject(error);
     });
   };
-  
+
   const downloadImage = () => {
     if (!resultUrl) return;
-    
+
     const link = document.createElement('a');
     link.href = resultUrl;
     link.download = 'ghibli-style-image.png';
@@ -70,7 +69,7 @@ const GhibliImageConverter = () => {
     link.click();
     document.body.removeChild(link);
   };
-  
+
   const handleImageChange = (newImage) => {
     setImage(newImage);
     if (newImage) {
@@ -85,7 +84,7 @@ const GhibliImageConverter = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className="neoxr-card p-5"
+          className="neoxr-card p-5 max-w-xl mx-auto"  {/* Added max-width for neater layout */}
         >
           <div className="flex items-center mb-4">
             <div className="neoxr-icon text-yellow-400 mr-4">
@@ -94,20 +93,20 @@ const GhibliImageConverter = () => {
               </svg>
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">REQUEST</h2>
+              <h2 className="text-xl font-bold text-white">UPLOAD</h2> {/*Simplified header text*/}
               <p className="text-gray-400 mono-font">{uploadedCount.toLocaleString()}</p>
               <p className="text-xs text-gray-500">{new Date().toLocaleDateString()} - {new Date().toLocaleTimeString()}</p>
             </div>
           </div>
-          
+
           <ImageUploader onImageChange={handleImageChange} />
         </motion.div>
-        
+
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="neoxr-card p-5"
+          className="neoxr-card p-5 max-w-xl mx-auto" {/* Added max-width for neater layout */}
         >
           <div className="flex items-center mb-4">
             <div className="neoxr-icon text-yellow-400 mr-4">
@@ -121,35 +120,28 @@ const GhibliImageConverter = () => {
               <p className="text-xs text-gray-500">{new Date().toLocaleDateString()} - {new Date().toLocaleTimeString()}</p>
             </div>
           </div>
-          
+
           <ImageResult loading={loading} resultUrl={resultUrl} />
         </motion.div>
       </div>
-      
+
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="neoxr-card p-5"
+        className="neoxr-card p-5 max-w-3xl mx-auto" {/* Added max-width for neater layout */}
       >
-        <div className="flex items-center mb-4">
-          <div className="neoxr-icon text-yellow-400 mr-4">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-white">INFORMATION</h2>
-          </div>
+        <div className="flex items-center mb-4"> {/*Simplified header structure */}
+          <h2 className="text-xl font-bold text-white">How it works</h2> {/*Simplified header text*/}
         </div>
-        
+
         <div className="pl-4 border-l-2 border-yellow-400/20 mb-4">
           <p className="text-gray-300 text-sm">
             This service transforms regular photos into the beautiful Studio Ghibli art style.
             Upload an image, click transform, and download your Ghibli-style creation.
           </p>
         </div>
-        
+
         <ActionButtons 
           image={image}
           loading={loading}
@@ -159,21 +151,19 @@ const GhibliImageConverter = () => {
           downloadImage={downloadImage}
         />
       </motion.div>
-      
+
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.5 }}
-        className="neoxr-card p-5 mt-6"
+        className="neoxr-card p-5 max-w-xl mx-auto" {/* Added max-width for neater layout */}
       >
-        <div className="mb-2">
-          <h2 className="text-xl font-bold text-white mb-1">CHANGELOG</h2>
-          <div className="h-1 w-8 bg-yellow-400"></div>
-        </div>
-        
+        <h2 className="text-xl font-bold text-white mb-1">Recent Updates</h2> {/*Simplified header text*/}
+        <div className="h-1 w-8 bg-yellow-400 mb-4"></div> {/* Added margin for better spacing */}
+
         <div className="mt-6 relative">
           <div className="timeline-line"></div>
-          
+
           <div className="pl-6 relative mb-6">
             <div className="timeline-dot"></div>
             <div className="neoxr-card p-3 bg-opacity-50">
@@ -181,7 +171,7 @@ const GhibliImageConverter = () => {
               <p className="text-gray-300">[New] Ghibli style transformation engine 🚀</p>
             </div>
           </div>
-          
+
           <div className="pl-6 relative">
             <div className="timeline-dot"></div>
             <div className="neoxr-card p-3 bg-opacity-50">

@@ -22,37 +22,32 @@ const ImageUploader = ({ onImageChange }) => {
 
   return (
     <div className="mt-2">
-      <motion.div 
+      <motion.div
         {...getRootProps()}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className={`image-container cursor-pointer p-4 flex flex-col items-center justify-center h-48 transition-all ${
-          isDragActive ? 'border-blue-500 bg-blue-500/10' : ''
-        }`}
+        className={`border-2 border-dashed border-gray-400 rounded-lg p-6 flex flex-col items-center justify-center h-48 transition-all cursor-pointer hover:border-blue-500 ${isDragActive ? 'border-blue-500 bg-blue-50/10' : ''}`}
       >
         <input {...getInputProps()} />
-        <svg 
-          className={`h-12 w-12 mb-3 ${isDragActive ? 'text-blue-400' : 'text-gray-400'}`} 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24" 
+        <svg
+          className={`h-10 w-10 mb-3 text-gray-500 ${isDragActive ? 'text-blue-400' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
           />
         </svg>
-        <p className="text-center text-gray-300 text-sm mb-1">
-          {isDragActive ? 'Drop your image here...' : 'Drag & drop an image here'}
+        <p className="text-center text-gray-500 text-sm mb-1">
+          {isDragActive ? 'Drop your image here...' : 'Drag & drop an image here or click to select'}
         </p>
         <p className="text-center text-gray-500 text-xs">
-          or click to select a file
-        </p>
-        <p className="mt-2 text-xs text-gray-500">
-          Supported: JPEG, PNG (Max: 5MB)
+          JPEG, PNG (Max: 5MB)
         </p>
       </motion.div>
     </div>

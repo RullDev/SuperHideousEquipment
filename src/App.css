@@ -43,10 +43,11 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 52px;
+  height: 52px;
   border-radius: 12px;
   background-color: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 .neoxr-btn {
@@ -80,12 +81,16 @@ body {
 }
 
 .neoxr-status {
-  background: rgba(76, 158, 235, 0.1);
-  border: 1px solid rgba(76, 158, 235, 0.3);
-  color: var(--ghibli-blue);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  color: var(--neoxr-highlight);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
   margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .timeline-dot {
@@ -150,4 +155,50 @@ body {
 
 .animate-loading-pulse {
   animation: loadingPulse 1.5s infinite;
+}
+
+/* Stats cards styling */
+.stats-card {
+  background-color: var(--neoxr-card);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.stats-icon {
+  background-color: rgba(255, 215, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.stats-info {
+  flex: 1;
+}
+
+.stats-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.stats-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--neoxr-highlight);
+}
+
+.stats-date {
+  font-size: 0.75rem;
+  color: #718096;
+  font-family: 'Roboto Mono', monospace;
 }
