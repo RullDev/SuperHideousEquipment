@@ -84,8 +84,7 @@ const GhibliImageConverter = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className="neoxr-card p-5 max-w-xl mx-auto"  {/* Added max-width for neater layout */}
-        >
+          className="neoxr-card p-5 max-w-xl mx-auto">
           <div className="flex items-center mb-4">
             <div className="neoxr-icon text-yellow-400 mr-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
