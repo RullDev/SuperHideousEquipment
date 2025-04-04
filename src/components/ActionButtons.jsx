@@ -7,7 +7,8 @@ const ActionButtons = ({
   resultUrl, 
   handleSubmit, 
   handleReset, 
-  downloadImage 
+  downloadImage,
+  previewUrl
 }) => {
   return (
     <div className="flex flex-wrap justify-center gap-4 mt-6">
