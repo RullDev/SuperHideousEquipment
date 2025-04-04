@@ -1,4 +1,3 @@
-
 import { useState, useRef } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
@@ -19,7 +18,7 @@ const GhibliImageConverter = () => {
         setError('Only JPEG/PNG formats are supported!');
         return;
       }
-      
+
       setError(null);
       setImage(file);
       setPreviewUrl(URL.createObjectURL(file));
@@ -44,21 +43,21 @@ const GhibliImageConverter = () => {
 
     setLoading(true);
     setError(null);
-    
+
     try {
       const reader = new FileReader();
       reader.readAsDataURL(image);
-      
+
       reader.onload = async () => {
         const base64Image = reader.result;
-        
+
         const payload = {
           imageUrl: base64Image
         };
-        
+
         try {
           const { data } = await axios.post(
-            'https://ghibliai-worker.ahmadjandal.workers.dev/generate',
+            '/api/transform-ghibli',
             payload,
             {
               headers: {
@@ -67,8 +66,8 @@ const GhibliImageConverter = () => {
               timeout: 60000
             }
           );
-          
-          if (data?.result) {
+
+          if (data?.success && data?.result) {
             setResultUrl(data.result);
           } else {
             throw new Error('Failed to process image');
@@ -126,7 +125,7 @@ const GhibliImageConverter = () => {
           <h2 className="text-3xl font-fantasy font-bold text-ghibli-blue mb-6 text-center">
             Ghibli Style Image Generator
           </h2>
-          
+
           {error && (
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
@@ -146,7 +145,7 @@ const GhibliImageConverter = () => {
                 } ${previewUrl ? 'bg-gray-50' : ''}`}
               >
                 <input {...getInputProps()} ref={fileInputRef} />
-                
+
                 {previewUrl ? (
                   <img 
                     src={previewUrl} 
