@@ -9,9 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json({ limit: '50mb' })); // Increase limit to handle large images
 
-// Ghibli transformation endpoint
+// Ghibli AI transformation endpoint
 app.post('/api/transform-ghibli', async (req, res) => {
   try {
     const { imageUrl } = req.body;
@@ -19,11 +19,11 @@ app.post('/api/transform-ghibli', async (req, res) => {
     if (!imageUrl) {
       return res.status(400).json({ 
         success: false, 
-        message: 'No image provided' 
+        message: 'Image URL is required' 
       });
     }
 
-    // Forward request to Ghibli AI API
+    // Send to Ghibli AI service
     const { data } = await axios.post(
       'https://ghibliai-worker.ahmadjandal.workers.dev/generate',
       { imageUrl },
@@ -34,38 +34,41 @@ app.post('/api/transform-ghibli', async (req, res) => {
         timeout: 60000 // 1 minute timeout
       }
     );
-    
-    if (!data.result) {
+
+    if (!data?.result) {
       return res.status(500).json({ 
         success: false, 
         message: 'Failed to process image' 
       });
     }
-    
-    return res.status(200).json({ 
+
+    // Return the result
+    return res.json({ 
       success: true, 
       result: data.result 
     });
     
   } catch (error) {
-    console.error('Error processing request:', error);
+    console.error('Error processing image:', error);
+    
+    let errorMessage = 'Error processing image';
+    if (error.response) {
+      errorMessage += ` (${error.response.status})`;
+      if (error.response.data?.message) {
+        errorMessage += `: ${error.response.data.message}`;
+      }
+    } else if (error.message) {
+      errorMessage += `: ${error.message}`;
+    }
     
     return res.status(500).json({ 
       success: false, 
-      message: error.message || 'Server error',
-      error: error.response ? error.response.data : null
+      message: errorMessage 
     });
   }
 });
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK' });
-});
-
-// Start server
+// Start the server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-export default app;

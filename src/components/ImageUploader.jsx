@@ -1,7 +1,6 @@
 
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useDropzone } from 'react-dropzone';
 
 const ImageUploader = ({ 
   onDrop, 
@@ -12,16 +11,32 @@ const ImageUploader = ({
 }) => {
   const fileInputRef = useRef();
 
+  const handleClickUpload = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
     <div className="flex flex-col">
       <motion.div 
         whileHover={{ scale: 1.02 }}
-        {...getRootProps()} 
         className={`border-2 border-dashed rounded-lg p-6 mb-4 transition-colors cursor-pointer flex flex-col items-center justify-center min-h-[250px] ${
           isDragActive ? 'border-ghibli-blue bg-blue-50' : 'border-gray-300 hover:border-ghibli-blue'
         } ${previewUrl ? 'bg-gray-50' : ''}`}
+        onClick={handleClickUpload}
       >
-        <input {...getInputProps()} ref={fileInputRef} />
+        <input 
+          type="file" 
+          accept="image/jpeg, image/png, image/jpg"
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              onDrop([e.target.files[0]]);
+            }
+          }}
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+        />
         
         {previewUrl ? (
           <img 

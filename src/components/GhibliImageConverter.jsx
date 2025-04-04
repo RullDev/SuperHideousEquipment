@@ -28,14 +28,10 @@ const GhibliImageConverter = () => {
     }
   };
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      'image/jpeg': ['.jpg', '.jpeg'],
-      'image/png': ['.png']
-    },
-    multiple: false
-  });
+  // These are dummy props since we're not using react-dropzone anymore
+  const getRootProps = () => ({});
+  const getInputProps = () => ({});
+  const isDragActive = false;
 
   const handleSubmit = async () => {
     if (!image) {
