@@ -33,6 +33,13 @@ body {
   background-color: var(--neoxr-card);
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.neoxr-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .neoxr-highlight {
@@ -58,10 +65,18 @@ body {
   font-weight: 600;
   transition: all 0.2s;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .neoxr-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.neoxr-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .neoxr-btn-primary {
@@ -91,6 +106,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .timeline-dot {
@@ -119,6 +135,12 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 0.75rem;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.image-container:hover {
+  border-color: rgba(255, 215, 0, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Animation for loading dots */
@@ -166,6 +188,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .stats-icon {
@@ -177,6 +207,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .stats-info {

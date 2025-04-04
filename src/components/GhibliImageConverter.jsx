@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
@@ -92,7 +93,7 @@ const GhibliImageConverter = () => {
               </svg>
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">UPLOAD</h2> {/*Simplified header text*/}
+              <h2 className="text-xl font-bold text-white">UPLOAD</h2>
               <p className="text-gray-400 mono-font">{uploadedCount.toLocaleString()}</p>
               <p className="text-xs text-gray-500">{new Date().toLocaleDateString()} - {new Date().toLocaleTimeString()}</p>
             </div>
@@ -105,8 +106,7 @@ const GhibliImageConverter = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="neoxr-card p-5 max-w-xl mx-auto" {/* Added max-width for neater layout */}
-        >
+          className="neoxr-card p-5 max-w-xl mx-auto">
           <div className="flex items-center mb-4">
             <div className="neoxr-icon text-yellow-400 mr-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -128,10 +128,9 @@ const GhibliImageConverter = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="neoxr-card p-5 max-w-3xl mx-auto" {/* Added max-width for neater layout */}
-      >
-        <div className="flex items-center mb-4"> {/*Simplified header structure */}
-          <h2 className="text-xl font-bold text-white">How it works</h2> {/*Simplified header text*/}
+        className="neoxr-card p-5 max-w-3xl mx-auto">
+        <div className="flex items-center mb-4">
+          <h2 className="text-xl font-bold text-white">How it works</h2>
         </div>
 
         <div className="pl-4 border-l-2 border-yellow-400/20 mb-4">
@@ -155,10 +154,9 @@ const GhibliImageConverter = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.5 }}
-        className="neoxr-card p-5 max-w-xl mx-auto" {/* Added max-width for neater layout */}
-      >
-        <h2 className="text-xl font-bold text-white mb-1">Recent Updates</h2> {/*Simplified header text*/}
-        <div className="h-1 w-8 bg-yellow-400 mb-4"></div> {/* Added margin for better spacing */}
+        className="neoxr-card p-5 max-w-xl mx-auto mt-6">
+        <h2 className="text-xl font-bold text-white mb-1">Recent Updates</h2>
+        <div className="h-1 w-8 bg-yellow-400 mb-4"></div>
 
         <div className="mt-6 relative">
           <div className="timeline-line"></div>

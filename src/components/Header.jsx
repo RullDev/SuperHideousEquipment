@@ -1,13 +1,14 @@
+
 import { motion } from 'framer-motion';
 
 const Header = () => {
   return (
-    <header className="mb-6">
+    <header className="py-4 mb-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-center mb-8"
+        className="flex items-center justify-center"
       >
         <div className="flex items-center">
           <div className="neoxr-icon mr-4">
@@ -24,17 +25,14 @@ const Header = () => {
           </div>
         </div>
       </motion.div>
-
+      
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="neoxr-status flex items-center justify-center mb-8"
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="neoxr-status mx-auto mt-6"
       >
-        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <span>Transform your photos into magical Ghibli-style art</span>
+        <p className="font-medium">📢 Transform your images into Ghibli style art</p>
       </motion.div>
     </header>
   );
