@@ -31,7 +31,7 @@ app.post('/api/transform-ghibli', async (req, res) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        timeout: 60000 // 1 minute timeout
+        timeout: 120000 // 2 minute timeout
       }
     );
 
