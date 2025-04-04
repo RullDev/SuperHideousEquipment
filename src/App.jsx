@@ -1,7 +1,9 @@
+
 import { motion } from 'framer-motion';
 import GhibliImageConverter from './components/GhibliImageConverter';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ApiDocumentation from './components/ApiDocumentation';
 import './App.css';
 
 export default function App() {
@@ -15,6 +17,7 @@ export default function App() {
       >
         <Header />
         <GhibliImageConverter />
+        <ApiDocumentation />
         <Footer />
       </motion.div>
     </div>
